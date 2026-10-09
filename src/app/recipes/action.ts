@@ -7,8 +7,12 @@ import { notFound, redirect } from "next/navigation";
 
 
 export async function getRecipes() {
+    "use cache";
+    cacheLife("minutes");
+    cacheTag("recipes");
 
-    
+    await delay(1000); // Simulate a delay of 1 second
+
     return db.query("SELECT * FROM recipe").all() as Recipe[];
 }
 
